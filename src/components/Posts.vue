@@ -10,7 +10,7 @@
           <span class="post-author-info">{{item.author.info}}</span>
           <small>{{item.createTime}}</small>
       </div>
-        <h3>{{item.text}}</h3>
+        <h3>{{item.text | capitalize}}</h3>
         <button type="button" class="like-button">{{item.likes}}</button>
 
 
@@ -36,6 +36,13 @@ export default {
       this.list=resp.data;
         console.warn(resp.data)
     })
+  },
+  filters: {
+    capitalize: function (value) {
+      if (!value) return ''
+      value = value.toString()
+      return value.toUpperCase()
+    }
   }
 }
 </script>
