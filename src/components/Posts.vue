@@ -1,32 +1,136 @@
 <template>
   <div class="hello">
   <h1>Posts component</h1>
-  </div>
+    <section class="main-container" v-for="item in list" v-bind:key="item.id">
+      <div class="post">
+
+      <div class="post-title">
+          <img v-bind:src="item.author.avatar">
+          <span class="post-author">{{item.author.firstname + " " + item.author.lastname}}</span>
+          <span class="post-author-info">{{item.author.info}}</span>
+          <small>{{item.createTime}}</small>
+      </div>
+        <h3>{{item.text}}</h3>
+        <button type="button" class="like-button">{{item.likes}}</button>
+
+
+      </div>
+    </section>
+</div>
 </template>
 
 <script>
+import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from "vue-axios";
+Vue.use(VueAxios,axios)
+
 export default {
   name: 'Posts',
-  props: {
-    msg: String
+  data () {
+    return {list:undefined}
+  },
+  mounted() {
+    Vue.axios.get('https://private-517bb-wad20postit.apiary-mock.com/posts')
+    .then((resp) => {
+      this.list=resp.data;
+        console.warn(resp.data)
+    })
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.main-container {
+  width: 50%;
+  min-height: 100%;
+  margin: auto auto;
+  padding: 90px 15px 15px 15px;
+  background-color: #ffffff;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+
+.post {
+  width: 80%;
+  margin: 15px auto;
+  box-shadow: 0 0 15px rgba(38, 50, 56, 0.33);
+  border-radius: 5px;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+
+.post .post-author {
+  padding: 10px;
 }
-a {
-  color: #42b983;
+
+.post .post-author::after {
+  content: "";
+  display: block;
+  clear: both;
 }
+
+.post .post-author .post-author-info {
+  float: left;
+  position: relative;
+  width: 50%;
+}
+
+.post .post-author .post-author-info img {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  object-fit: cover;
+  object-position: top;
+  margin: 5px;
+}
+
+.post .post-author .post-author-info small {
+  position: absolute;
+  top: 10px;
+  left: 35px;
+}
+
+.post .post-author .post-author-info + small {
+  float: right;
+  color: grey;
+  padding: 10px;
+}
+
+.post .post-image img, video {
+  width: 100%;
+  min-height: 150px;
+  max-height: 350px;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.post .post-title {
+  padding: 10px;
+}
+
+.post .post-title h3 {
+  display: inline;
+}
+
+.post .post-title ~ .post-actions {
+  padding: 10px;
+}
+
+.like-button {
+  background-image: url(../assets/like.png);
+  background-size: 15px;
+  background-repeat: no-repeat;
+  background-position: 5px center;
+  background-color: #8a8a8a;
+  width: 60px;
+  height: 25px;
+  padding-left: 23px;
+  line-height: 10px;
+  text-align: left;
+  border: none;
+}
+
+.like-button.liked {
+  background-color: #01579b;
+}
+
 </style>

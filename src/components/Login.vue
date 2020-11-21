@@ -23,7 +23,7 @@
               <input type="password" name="password" placeholder="Password">
             </div>
             <div>
-              <button class="button" @click="login" v-if="!isLoggingIn">Log In</button>
+              <button @click="login" v-if="!isLoggingIn">Log In</button>
             </div>
             <div>
               <small>

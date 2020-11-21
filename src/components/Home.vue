@@ -8,7 +8,7 @@
 <script>
 // @ is an alias to /src
 import Posts from '@/components/Posts.vue'
-import Header from '@/components/Header'
+import Header from '@/components/Navbar'
 
 
 
