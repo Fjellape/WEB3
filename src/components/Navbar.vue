@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="navbar">
     <header>
       <nav>
         <div class="logo-container">
@@ -10,8 +10,8 @@
           <button type="button">Search</button>
         </div>
         <div class="avatar-container">
-          <img class="avatar">
-          <div class="drop-down-container">
+          <img class="avatar" @click="showMenu">
+          <div v-if='menuShown' class="drop-down-container">
             <span id="user-name">John Doe</span>
             <span id="user-email"></span>
             <span class="separator"></span>
@@ -47,19 +47,14 @@ export default {
   data() {
     return {
       isLoggingIn: false,
-      showMore: false
+      menuShown: false
     }
   },
 
   methods: {
 
-    showMoree() {
-      this.showMore = true
-
-      setTimeout(() => {
-        this.showMore = false
-        setTimeout(() => this.redirectToLogOut(), 200)
-      }, 200)
+    showMenu: function() {
+      this.menuShown = !this.menuShown()
     },
 
     logOut() {
@@ -176,7 +171,7 @@ button:hover {
   cursor: pointer;
 }
 
-/*.drop-down-container {
+.drop-down-container {
   position: absolute;
   min-width: 150px;
   height: auto;
@@ -185,7 +180,6 @@ button:hover {
   right: 0;
   top: 50px;
   text-align: left;
-  display: none;
 }
 
 .drop-down-container span {
@@ -195,7 +189,7 @@ button:hover {
 .drop-down-container span.separator {
   border-bottom: 1px solid #d7d7d7;
   margin: 10px -10px;
-}*/
+}
 
 nav div.avatar-container {
   margin-right: 15px;
