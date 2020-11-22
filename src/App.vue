@@ -4,14 +4,13 @@
   </div>
 </template>
 
-<style>
+<style scoped>
+
 #app {
-  padding-top: 120px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  text-align: center;
   background-color: #0277bd;
-  padding-bottom: 200px;
-  margin: 0;
   width: 100%;
   height: 100%;
 }

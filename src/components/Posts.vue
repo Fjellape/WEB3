@@ -1,17 +1,28 @@
 <template>
-  <div class="hello">
-  <h1>Posts component</h1>
+  <div class="posts">
+    <Navbar></Navbar>
     <section class="main-container" v-for="item in list" v-bind:key="item.id">
       <div class="post">
+        <div class="post-author">
+          <span class="post-author-info">{{item.author.info}}
+            <img v-bind:src="item.author.avatar">
+          <span class="post-author">{{item.author.firstname + " " + item.author.lastname}}
+
+          </span>
+            </span>
+          <small>{{item.createTime}}</small>
+        </div>
+
 
       <div class="post-title">
-          <img v-bind:src="item.author.avatar">
-          <span class="post-author">{{item.author.firstname + " " + item.author.lastname}}</span>
-          <span class="post-author-info">{{item.author.info}}</span>
-          <small>{{item.createTime}}</small>
-      </div>
+
         <h3>{{item.text | capitalize}}</h3>
+
+      </div>
+
+        <div class="post-actions">
         <button type="button" class="like-button">{{item.likes}}</button>
+        </div>
 
 
       </div>
@@ -20,13 +31,18 @@
 </template>
 
 <script>
+import Navbar from "@/components/Navbar";
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from "vue-axios";
+
 Vue.use(VueAxios,axios)
 
 export default {
   name: 'Posts',
+  components : {
+    Navbar
+  },
   data () {
     return {list:undefined}
   },
@@ -53,7 +69,7 @@ export default {
   width: 50%;
   min-height: 100%;
   margin: auto auto;
-  padding: 90px 15px 15px 15px;
+  padding: 10px 5px 5px 5px;
   background-color: #ffffff;
 }
 
@@ -87,7 +103,7 @@ export default {
   border-radius: 100%;
   object-fit: cover;
   object-position: top;
-  margin: 5px;
+  margin: -8px;
 }
 
 .post .post-author .post-author-info small {

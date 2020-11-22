@@ -63,14 +63,16 @@ export default {
 </script>
 <style scoped>
 
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-}
+
 
 .loginForm {
+  padding-top: 120px;
+  padding-bottom: 120px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #0277bd;
   color: #263238;
 }

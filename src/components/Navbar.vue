@@ -34,14 +34,33 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from "vue-axios";
+
+Vue.use(VueAxios,axios)
+
 export default {
   name: "Navbar",
+
+
   data() {
     return {
-      isLoggingIn: false
+      isLoggingIn: false,
+      showMore: false
     }
   },
+
   methods: {
+
+    showMoree() {
+      this.showMore = true
+
+      setTimeout(() => {
+        this.showMore = false
+        setTimeout(() => this.redirectToLogOut(), 200)
+      }, 200)
+    },
 
     logOut() {
       this.isLoggingIn = true

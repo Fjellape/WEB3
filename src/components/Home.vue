@@ -1,22 +1,22 @@
 <template>
   <div class="home">
-    <Header></Header>
-    <Posts msg="Welcome to Your Vue.js App"/>
+    <Navbar></Navbar>
+    <Posts></Posts>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Posts from '@/components/Posts.vue'
-import Header from '@/components/Navbar'
+import Navbar from "@/components/Navbar";
 
 
 
 export default {
   name: 'Home',
   components: {
-    Posts,
-    Header
+    Navbar,
+    Posts
   }
 }
 </script>
