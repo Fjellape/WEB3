@@ -21,7 +21,7 @@
       </div>
 
         <div class="post-actions">
-        <button type="button" class="like-button">{{item.likes}}</button>
+        <button type="button" :class="{'likeButtonBlue': isclicked, 'likeButtonGrey': !isclicked }" @click="clicked">{{item.likes}}</button>
         </div>
 
 
@@ -44,7 +44,7 @@ export default {
     Navbar
   },
   data () {
-    return {list:undefined}
+    return {list:undefined, isclicked: false}
   },
   mounted() {
     Vue.axios.get('https://private-517bb-wad20postit.apiary-mock.com/posts')
@@ -53,11 +53,16 @@ export default {
         console.warn(resp.data)
     })
   },
+  methods: {
+    clicked: function () {
+        this.isclicked = !this.isclicked
+    }
+  },
   filters: {
     capitalize: function (value) {
       if (!value) return ''
       value = value.toString()
-      return value.toUpperCase()
+      return value.charAt(0).toUpperCase() + value.slice(1)
     }
   }
 }
@@ -138,22 +143,63 @@ export default {
   padding: 10px;
 }
 
-.like-button {
+.likeButtonBlue {
   background-image: url(../assets/like.png);
-  background-size: 15px;
+  background-size: 20px;
   background-repeat: no-repeat;
   background-position: 5px center;
   background-color: #8a8a8a;
-  width: 60px;
-  height: 25px;
+  padding: 12px 22px;
+  width: 80px;
+  height: 35px;
   padding-left: 23px;
   line-height: 10px;
-  text-align: left;
+  text-align: center;
   border: none;
+  border-radius: 5px;
+}
+
+.likeButtonGrey {
+  background-image: url(../assets/like.png);
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: 5px center;
+  background-color: #01579b;
+  padding: 12px 22px;
+  width: 80px;
+  height: 35px;
+  padding-left: 23px;
+  line-height: 10px;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+}
+
+.like-button {
+  background-image: url(../assets/like.png);
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: 5px center;
+  background-color: #8a8a8a;
+  padding: 12px 22px;
+  width: 80px;
+  height: 35px;
+  padding-left: 23px;
+  line-height: 10px;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
 }
 
 .like-button.liked {
   background-color: #01579b;
+}
+
+.is-blue {
+  background: #8a8a8a;
+}
+.is-grey {
+  background: #01579b;
 }
 
 </style>

@@ -5,7 +5,7 @@
     <div class="profile">
       <img v-bind:src="item.avatar">
       <h2>{{item.firstname + item.lastname}}</h2>
-      <button class="follow-button">Follow</button>
+      <button class="follow-button" v-bind:style='{"background": (isActive? "#82008f" : "#ffffff"), }' @click="follow" >Follow</button>
     </div>
     </section>
 
@@ -25,8 +25,9 @@ export default {
   components: {
     Navbar
   },
+
   data () {
-    return {list:undefined}
+    return {list:undefined, isActive: false}
   },
   mounted() {
     Vue.axios.get('https://private-517bb-wad20postit.apiary-mock.com/profiles')
@@ -34,6 +35,11 @@ export default {
           this.list=resp.data;
           console.warn(resp.data)
         })
+  },
+  methods: {
+    follow: function () {
+      this.isActive = !this.isActive
+    }
   }
 }
 </script>
@@ -49,16 +55,16 @@ export default {
 }
 
 .profile {
-  width: 40%;
+  width: 80%;
   display: inline-block;
-  border: 1px solid #dedede;
+  border: 2px solid #dedede;
   border-radius: 5px;
   text-align: center;
   margin: 1%;
 }
 .profile img{
-  width: 75px;
-  height: 75px;
+  width: 150px;
+  height: 150px;
   border-radius: 100%;
   object-fit: cover;
   object-position: top;
@@ -66,11 +72,13 @@ export default {
 }
 
 .profile h2{
-  font-size: 16px;
+  font-size: 24px;
 }
 
 .follow-button{
   background-color: #82008f;
+  padding: 12px 22px;
+  font-size: larger;
 }
 
 .follow-button.followed{
